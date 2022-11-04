@@ -24,7 +24,10 @@ router.post("/register", async (req, res)=> {
         });
 
         const user = await newUser.save();
-        res.status(200).json(user)
+        res.status(200).json({
+            "message": "Registered Successfully!",
+            user
+        })
     } catch (err) {
         res.status(500).json(err);
     }
@@ -52,7 +55,11 @@ router.post("/login", async (req, res) => {
 
         // Destructuring the user to send other details except password
         const { password, ...other } = user._doc;
-        res.status(200).json({...other, accessToken});
+        res.status(200).json({
+            "message": "Login Successful!",
+            ...other,
+            accessToken
+        });
     } catch (err) {
         res.status(500).json(err);
     }
