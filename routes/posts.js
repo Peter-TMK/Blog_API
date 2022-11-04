@@ -22,7 +22,7 @@ router.post("/", verifyToken, async (req, res) => {
 router.get("/:id", verifyToken, async (req, res) => {
     // try {
         // let post;
-        const post = await Post.findById(req.params.id).populate("owner");
+        const post = await Post.findById(req.params.id).populate("author_info");
         if(!post){
             return res.status(404).send('Post not found!')
         }
@@ -36,6 +36,29 @@ router.get("/:id", verifyToken, async (req, res) => {
     // }
 });
 
+// Get All Owners' Posts
+// router.get("/p", verifyToken, async (req, res) => {
+//     const state = req.query.state;
+//     const { page=1, limit=20 } = req.query;
+//     try{
+//         let posts;
+//         if(state){
+//             posts = await Post.find({ state }).find({ author_info }).sort({ _id: -1 }).limit(limit*1).skip((page-1)*limit).exec();
+//         } else {
+//             posts = await Post.find().sort({ reading_time: -1 }).limit(limit*1).skip((page-1)*limit).exec();
+            
+//         }
+//         // posts.reading_time = readTime(posts.body)
+//         const count = await Post.countDocuments();
+//         res.status(200).json({
+//             posts,
+//             totalPages: Math.ceil(count / limit),
+//             currentPage: page
+//         });
+//     } catch(err){
+//         res.status(500).json(err);
+//     }
+// })
 
 // // Get Post by username
 // router.get("/:username", verifyToken, async (req, res) => {
@@ -87,6 +110,7 @@ router.get("/", verifyToken, async (req, res) => {
     const author = req.query.author;
     const tag = req.query.tag;
     const state = req.query.state;
+    const author_info = req.query.author_info;
     const { page=1, limit=20 } = req.query;
     try{
         let posts;
@@ -96,6 +120,8 @@ router.get("/", verifyToken, async (req, res) => {
             posts = await Post.find({ author }).sort({ _id: -1 }).limit(limit*1).skip((page-1)*limit).exec();
         } else if(state){
             posts = await Post.find({ state }).sort({ _id: -1 }).limit(limit*1).skip((page-1)*limit).exec();
+        } else if(author_info){
+            posts = await Post.find({ author_info }).sort({ _id: -1 }).limit(limit*1).skip((page-1)*limit).exec();
         } else if(tag){
             posts = await Post.find({
                 tags: {
