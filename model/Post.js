@@ -3,15 +3,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const PostSchema = new Schema({
     title: { type: String, required: true, unique: true },
-    // username: { type: String, required: true, unique: true },
     description: { type: String },
     tags: { type: Array },
-    author: { type: String },
     state: { type: String, enum: ['draft', 'published'], default: 'draft'},
     read_count: { type: Number, default: 0 },
     reading_time: { type: Number },
     body: { type: String, required: true },
-    author_info: {
+    author: {
         type: Schema.Types.ObjectId,
         ref: "User"
     }

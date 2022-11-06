@@ -1,3 +1,4 @@
+// An algorithm that calculates an estimated time to read a blog
 const readTime = (post) => {
     const numWords = post.split(" ").length
     const wpm = numWords/200
