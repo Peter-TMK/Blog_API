@@ -3,11 +3,11 @@ const app = express()
 require('dotenv').config()
 const PORT = process.env.PORT
 const mongoose = require('mongoose')
-const { connectToMongoDB } = require('./db')
-const authRoute = require("./routes/auth")
+const { connectToMongoDB } = require('./database/db')
+const authRoute = require("./routes/authRoute")
 const userRoute = require("./routes/users")
 const postRoute = require("./routes/posts")
-const pubRoute = require("./routes/publishedPosts")
+const publishedPostRoute = require("./routes/publishedPosts")
 
 connectToMongoDB()
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
 app.use("/api/posts", postRoute)
-app.use("/api/pubPosts", pubRoute)
+app.use("/api/publishedPosts", publishedPostRoute)
 
 // routes
 // const UserControls = require("./controllers/UserController");
