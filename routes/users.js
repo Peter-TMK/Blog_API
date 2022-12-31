@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const CryptoJS = require("crypto-js")
 const PASSWORD_SECRET_KEY = process.env.PASSWORD_SECRET_KEY
 const { verifyToken } = require('../middleware/authBearerToken');
+const { updateUserValidationMiddleware } = require('../validators/users.validator')
 
 // Get User by ID
 router.get("/:id", async (req, res) => {
@@ -32,7 +33,7 @@ router.get("/", async (req, res) => {
 });
 
 // Update User By ID
-router.put("/:id", verifyToken, async (req, res)=> {
+router.put("/:id", verifyToken, updateUserValidationMiddleware, async (req, res)=> {
         if(req.body.password){
             req.body.password = CryptoJS.AES.encrypt(req.body.password, PASSWORD_SECRET_KEY).toString();
         }
