@@ -1,11 +1,15 @@
-const express = require('express')
+const express = require('express');
 const postRouter = express.Router();
 const { verifyToken } = require('../middleware/authBearerToken');
-const PostController = require("../controllers/postController")
+const PostController = require("../controllers/postController");
+const {
+    postValidationMiddleWare,
+    updatePostValidationMiddleware
+} = require('../validators/posts.validator')
 
 
 // Create Post
-postRouter.post("/", verifyToken, PostController.createPost);
+postRouter.post("/", verifyToken, postValidationMiddleWare, PostController.createPost);
 
 // Get Post by ID
 postRouter.get("/:id", verifyToken, PostController.getPost);
@@ -14,7 +18,7 @@ postRouter.get("/:id", verifyToken, PostController.getPost);
 postRouter.get("/", verifyToken, PostController.getAllPosts);
 
 // Update A Post
-postRouter.put("/:id", verifyToken, PostController.updatePost);
+postRouter.put("/:id", verifyToken, updatePostValidationMiddleware, PostController.updatePost);
 
 // Delete A Post
 postRouter.delete("/:id", verifyToken, PostController.deletePost);
