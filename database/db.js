@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const logger = require("../logging/logger");
 require("dotenv").config()
 
 const MONGO_URL = process.env.MONGO_URL
@@ -9,12 +10,12 @@ function connectToMongoDB(){
     mongoose.connect(MONGO_URL)
 
     mongoose.connection.on("connected", () => {
-        console.log("Connected to MongoDB Atlas Successfully!");
+        logger.info("Connected to MongoDB Successfully!");
     });
 
     mongoose.connection.on("error", (err) => {
-        console.log("An error occurred while connecting to MongoDB");
-        console.log(err);
+        logger.error("An error occurred while connecting to MongoDB");
+        logger.error(err.message);
     })
 }
 

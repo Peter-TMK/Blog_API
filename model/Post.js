@@ -15,4 +15,5 @@ const PostSchema = new Schema({
     }
 }, {timestamps: true});
 
+// compiling the model
 module.exports = mongoose.model("Post", PostSchema)
