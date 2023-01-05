@@ -59,3 +59,4 @@
 {"level":"info","message":"Connected to MongoDB Successfully!"}
 {"level":"info","message":"Server is running at http://localhost:7071"}
 {"level":"info","message":"Connected to MongoDB Successfully!"}
+{"level":"error","message":"\"firstname\" length must be at least 3 characters long"}

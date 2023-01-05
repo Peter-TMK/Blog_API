@@ -42,8 +42,8 @@ Database
 
 Host URL's
 ---
-- [GitHub Link](https://github.com/Peter-TMK/***)
-- [Heroku Link](https://***)
+- [GitHub Link](https://github.com/Peter-TMK/Blog_API)
+- [Cyclic Link](https://excel-blog.cyclic.app)
 
 Data Models
 ---
